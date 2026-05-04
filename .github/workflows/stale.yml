@@ -1,0 +1,20 @@
+name: Stale 이슈 처리
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: "아직도 재현되나요? 그 사이 시간은 계속 흐르고 있었습니다. 30일 내 응답이 없으면 이슈가 닫힙니다."
+          close-issue-message: "응답이 없어 이슈를 닫습니다. 시간 문제는 여전히 미해결 상태입니다."
+          days-before-stale: 30
+          days-before-close: 7
+          stale-issue-label: "stale"
